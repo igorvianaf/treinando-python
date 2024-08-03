@@ -1,5 +1,5 @@
 #codigo principal
-from lib.interface import *
+from lib.utilidades import *
 
 while True:
     menu('CALCULADORA')
