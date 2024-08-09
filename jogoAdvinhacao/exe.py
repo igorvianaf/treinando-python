@@ -37,6 +37,7 @@ while True:
     sair = input(f'{jogador2}, você deseja desistir? [S - Sim/ N - Não]: ').upper()
     if sair in 'S':
         print(f'A letra escolhida por {jogador1} foi {lmisteriosa}. Volte sempre!!')
+        sleep(3)
         break
     elif sair in 'N':
         print(f'Muito bom, {jogador2}. Vamos tentar novamente!')
