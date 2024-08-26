@@ -1,4 +1,4 @@
-import util
+import utilidades
 import os
 from time import sleep
 
@@ -11,7 +11,7 @@ jogador1 = input('--> Jogador 1, Digite seu nome: ').strip()
 jogador2 = input('--> Jogador 2, digite seu nome: ').strip()
 
 print(f'{jogador1} agora é sua vez!', end=' ')
-lmisteriosa = util.checarLetra(l='')
+lmisteriosa = utilidades.checarLetra(l='')
 os.system('cls')
 # lmisteriosa = input(f'{jogador1}, digite a letra misteriosa: ')
 letras = set()
