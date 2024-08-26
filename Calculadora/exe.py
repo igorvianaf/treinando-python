@@ -1,4 +1,4 @@
-from lib.utilidades import *
+from lib.utilidades import menu, numInt, opcoes
 import os
 
 
