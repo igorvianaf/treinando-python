@@ -29,3 +29,16 @@ def opcoes(lista):
     opc = numInt('Escolha uma das opções: ')
     return opc
 
+def calculo(opc_usuario, n1, n2):
+    while True:
+        if opc_usuario == 1:
+            return f'A soma de {n1} + {n2} é {n1 + n2}'
+        elif opc_usuario == 2:
+            return f'A subtração de {n1} - {n2} é {n1 - n2}'
+        elif opc_usuario == 3:
+            return f'A multiplicação de {n1} * {n2} é {n1 * n2}'
+        elif opc_usuario == 4:
+            return f'A divisão entre {n1} e {n2} é {n1 / n2}'
+        else:
+            return 'Infelizmente não temos essa opção!'
+        
