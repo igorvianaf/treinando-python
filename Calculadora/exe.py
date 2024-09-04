@@ -14,7 +14,6 @@ while True:
         sair = input('Gostaria de realizar uma nova operação? [S/N]: ')[0].upper().strip()
         if sair in 'S':
             os.system('cls')
-            flag = False
         elif sair in 'N':
             os.system('cls')
             print('Até logo, espero que você retorne em breve!')
