@@ -1,7 +1,7 @@
 def checar_cupom(cupom):
-    for chave in cupons.keys():
-        if chave in cupom:
-            return True
+    for k, v in cupons.items():
+        if k in cupom:
+            return v
         else:
             return False
 def sair(string):
@@ -12,17 +12,18 @@ def sair(string):
     else:
         print('Por favor, digite uma opção válida!')
 
+
 cupons = {
-    'cupom10': 0.1,
-    'cupom20': 0.2,
-    'cupom30':0.3
+    'cupom10': 10,
+    'cupom20': 20,
+    'cupom30': 30
     }
 
 while True:
     entrada_usuario = input('Digite um cupom válido: ').strip()
-    
-    if checar_cupom(entrada_usuario):
-        print('Cupom válido')
+    valor = checar_cupom(entrada_usuario)
+    if valor:
+        print(f'Parabéns! Desconto de {valor}% adicionado!')
         break
     else:
         print('Cupom Inválido!')
@@ -30,6 +31,7 @@ while True:
         if flag:
             continue
         elif flag is False:
+            print('Até logo!')
             break
         elif flag is None:
             sair(input('Deseja adicionar um novo cupom [S - Sim/N - Não]? ').upper())
