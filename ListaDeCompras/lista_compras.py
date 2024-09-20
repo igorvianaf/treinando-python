@@ -65,6 +65,31 @@ def salvar_novo_arquivo(lista, caminho_arquivo):
         dados = json.dump(lista, arquivo, indent=2, ensure_ascii=False)
     return dados
 
+def verificar_opcoes(entrada_usuario):
+#Adicionar itens
+    if entrada_usuario == 'i':
+        limpar_tela()
+        adicionar(input('Informe o que deseja adicionar: '))
+#apagando itens
+    elif entrada_usuario == 'a':
+        limpar_tela()
+        exibir(lista)
+        apagar_item(input('Qual índice da lista você deseja apagar? '), lista)
+#listando itens
+    elif entrada_usuario == 'l':
+        limpar_tela()
+        exibir(lista)
+#desfazer alteração
+    elif entrada_usuario == 'd':
+        desfazer_alteracao(lista, lista_desfazer)
+#sair
+    elif entrada_usuario == 's':
+        print('Lista final: ')
+        exibir(lista)
+        sleep(10)
+        return False
+    else:
+        print('Opção inválida')
 
 
 CAMINHO_ARQUIVO = 'C:\\Users\\igorv\\OneDrive\\Documentos\\GitHub\\treinando-python\\ListaDeCompras\\lista.json'
@@ -75,30 +100,7 @@ print('Bem vindo a sua lista!')
 print('-' * 33)
 while True:
         print('Escolha uma das opções: ')
-        entrada = input('[i]nserir [a]pagar [l]istar [d]esfazer última alteração [s]air: ').strip()
-        opcao = entrada.lower()
-#adicionando itens
-        if opcao == 'i':
-            limpar_tela()
-            adicionar(input('Informe o que deseja adicionar: '))
-#apagando itens
-        elif opcao == 'a':
-            limpar_tela()
-            exibir(lista)
-            apagar_item(input('Qual índice da lista você deseja apagar? '), lista)
-#listando itens
-        elif opcao == 'l':
-            limpar_tela()
-            exibir(lista)
-#desfazer alteração
-        elif opcao == 'd':
-            desfazer_alteracao(lista, lista_desfazer)
-#sair
-        elif opcao == 's':
-            print('Lista final: ')
-            exibir(lista)
-            sleep(10)
+        opcoes = verificar_opcoes(input('[i]nserir [a]pagar [l]istar [d]esfazer última alteração [s]air: '))
+        if opcoes == False:
             break
-        else:
-            print('Opção inválida')
         salvar_novo_arquivo(lista, CAMINHO_ARQUIVO)
