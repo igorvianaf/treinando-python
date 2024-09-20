@@ -1,9 +1,7 @@
 import os
+import json
 from time import sleep
 
-
-lista = []
-lista_desfazer = []
 
 def adicionar(item):
     lista.append(item)
@@ -52,6 +50,26 @@ def desfazer_alteracao(lista, desfazer_alteracao):
 def limpar_tela():
     os.system('cls')
 
+def ler_arquivo(lista, caminho_arquivo):
+    try:
+        dados = []
+        with open(caminho_arquivo, 'r', encoding='utf8') as arquivo:
+            dados = json.load(arquivo)
+        return dados
+    except FileNotFoundError:
+        salvar_novo_arquivo(lista, caminho_arquivo)
+
+def salvar_novo_arquivo(lista, caminho_arquivo):
+    dados = lista
+    with open(caminho_arquivo, 'w', encoding='utf8') as arquivo:
+        dados = json.dump(lista, arquivo, indent=2, ensure_ascii=False)
+    return dados
+
+
+
+CAMINHO_ARQUIVO = 'C:\\Users\\igorv\\OneDrive\\Documentos\\GitHub\\treinando-python\\ListaDeCompras\\lista.json'
+lista = ler_arquivo([], CAMINHO_ARQUIVO)
+lista_desfazer = []
 
 print('Bem vindo a sua lista!')
 print('-' * 33)
@@ -83,3 +101,4 @@ while True:
             break
         else:
             print('Opção inválida')
+        salvar_novo_arquivo(lista, CAMINHO_ARQUIVO)
