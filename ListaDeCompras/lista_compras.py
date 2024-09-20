@@ -3,45 +3,82 @@ from time import sleep
 
 
 lista = []
+lista_desfazer = []
+
+def adicionar(item):
+    lista.append(item)
+    print(f'{item} foi adicionado a sua lista!')
+    if lista_desfazer:
+        lista_desfazer.pop()
+
+def exibir(lista):
+    if not lista:
+        print('Lista vazia!')
+        return
+    for indice, nome in enumerate(lista):
+        print(indice, nome)
+
+def apagar_item(item, lista):
+    if not lista:
+        print('Não temos itens para apagar em sua lista')
+        return
+    try:
+        apagar_lista_int = int(item)
+        print(f'{lista[apagar_lista_int]} foi removido com sucesso!')
+        lista_desfazer.append(lista[apagar_lista_int])
+        del lista[apagar_lista_int]
+
+    except ValueError:
+        print('Por favor, digite um número válido!')
+    except IndexError:
+        print('Por favor, informe um indice que esteja dentro da sua lista')
+
+def desfazer_alteracao(lista, desfazer_alteracao):
+    if not lista:
+        print('No momento, sua lista está vazia!')
+        return
+    if desfazer_alteracao:
+        ultimo_apagado = desfazer_alteracao[-1]
+        lista.append(ultimo_apagado)
+        print(f'A alteração foi desfeita com sucesso')
+        print(f'{ultimo_apagado} foi restaurado!')
+        desfazer_alteracao.pop()
+    elif lista:    
+        ultimo_excluido = lista.pop()
+        desfazer_alteracao.append(ultimo_excluido)
+        print(f'A alteração foi desfeita com sucesso')
+        print(f'{ultimo_excluido} foi excluído!')
+
+def limpar_tela():
+    os.system('cls')
+
+
 print('Bem vindo a sua lista!')
 print('-' * 33)
 while True:
         print('Escolha uma das opções: ')
-        entrada = input('[i]nserir [a]pagar [l]istar [s]air: ').strip()
+        entrada = input('[i]nserir [a]pagar [l]istar [d]esfazer última alteração [s]air: ').strip()
         opcao = entrada.lower()
-#adicionando itens        
+#adicionando itens
         if opcao == 'i':
-            os.system('cls')
-            adicionar_lista = input('Digite o que quer adicionar: ')
-            lista.append(adicionar_lista)
+            limpar_tela()
+            adicionar(input('Informe o que deseja adicionar: '))
 #apagando itens
         elif opcao == 'a':
-            os.system('cls')
-            for indice, nome in enumerate(lista):
-                print(indice, nome)
-            apagar_lista= input('Qual indice da lista você deseja apagar? ')
-            
-            try:
-                apagar_lista_int = int(apagar_lista)
-                del lista[apagar_lista_int]
-                print('Item removido com sucesso!')
-            except ValueError:
-                print('Por favor, digite um número válido!')
-            except IndexError:
-                print('Por favor, informe um indice que esteja dentro da lista')            
+            limpar_tela()
+            exibir(lista)
+            apagar_item(input('Qual índice da lista você deseja apagar? '), lista)
 #listando itens
         elif opcao == 'l':
-            os.system('cls')
-            
-            if len(lista) == 0:
-                print('Lista vazia')
-            for indice, nome in enumerate(lista):
-                print(indice, nome)
-            
+            limpar_tela()
+            exibir(lista)
+#desfazer alteração
+        elif opcao == 'd':
+            desfazer_alteracao(lista, lista_desfazer)
+#sair
         elif opcao == 's':
             print('Lista final: ')
-            for nome in lista:
-                print(nome)
+            exibir(lista)
             sleep(10)
             break
         else:
